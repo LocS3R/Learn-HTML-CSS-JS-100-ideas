@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./assets/css/base.css" />
     <link rel="stylesheet" href="./assets/css/main.css" />
     <title>HTML - CSS - JS - 100 Projects</title>
+    <!-- Google tag (gtag.js) -->
   </head>
   <body>
     <header class="p-3 bg-dark text-white">
@@ -30,6 +31,8 @@
     </header>
     <div class="main-content">
       <h1 class="title">100 Projects ideals for HTML & CSS & JS</h1>
+      Views: <span id="luotxem">0</span>
+
       <div class="album py-5">
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -442,6 +445,48 @@
         </div>
       </div>
     </div>
+    <script>
+      // Function to set a cookie
+      function setCookie(name, value, days) {
+        const expires = new Date(
+          Date.now() + days * 24 * 60 * 60 * 1000
+        ).toUTCString();
+        document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+      }
+
+      // Function to get a cookie value by name
+      function getCookie(name) {
+        const cookies = document.cookie.split("; ");
+        for (const cookie of cookies) {
+          const [cookieName, cookieValue] = cookie.split("=");
+          if (cookieName === name) {
+            return cookieValue;
+          }
+        }
+        return null;
+      }
+      function resetVisit() {
+        setCookie("visitCount", 0, 2); // Reset visitCount to 0 and set the cookie to expire in 30 days
+        console.log("Visit count has been reset.");
+      }
+      // Function to increment visit count and display
+
+      function countVisit() {
+        var res = document.getSelection("p .luotxem");
+        const visitCount = getCookie("visitCount") || 0;
+        const newVisitCount = parseInt(visitCount) + 1;
+        setCookie("visitCount", newVisitCount, 30); // Cookie expires in 30 days
+        const luotxemSpan = document.getElementById("luotxem");
+        if (luotxemSpan) {
+          luotxemSpan.textContent = newVisitCount;
+        }
+        console.log(`Welcome! This is your ${newVisitCount} visit.`);
+      }
+
+      // Call countVisit when the page loads
+      countVisit();
+      // resetVisit();
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
