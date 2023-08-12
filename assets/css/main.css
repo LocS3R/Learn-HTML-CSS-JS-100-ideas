@@ -1,0 +1,10 @@
+.title {
+  margin-top: 2rem;
+  display: flex;
+  font-size: 4rem;
+  align-items: center;
+  justify-content: center;
+}
+.card > img {
+  height: 225px;
+}
