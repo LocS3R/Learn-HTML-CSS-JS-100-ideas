@@ -1,62 +1,25 @@
-// toggle icon navbar
-let menuIcon = document.querySelector("#menu-icon");
-let navbar = document.querySelector(".navbar");
+// Lấy tất cả các phần tử có thuộc tính data-created
+const createdTimeElements = document.querySelectorAll("[data-created]");
 
-menuIcon.onclick = () => {
-  menuIcon.classList.toggle("bx-x");
-  navbar.classList.toggle("active");
-};
-// changes navbar
-let section = document.querySelectorAll("section");
-let navLinks = document.querySelectorAll("header nav a");
+// Lặp qua từng phần tử để xử lý thời gian tạo
+createdTimeElements.forEach(function (element) {
+  const createdTime = new Date(element.getAttribute("data-created"));
+  const currentTime = new Date();
 
-window.onscroll = () => {
-  section.forEach((sec) => {
-    let top = window.scrollY;
-    let offset = sec.offsetTop - 150;
-    let height = sec.offsetHeight;
-    let id = sec.getAttribute("id");
-    if (top >= offset && top < offset + height) {
-      navLinks.forEach((links) => {
-        links.classList.remove("active");
-        document
-          .querySelector("header nav a[href*=" + id + "]")
-          .classList.add("active");
-      });
-    }
-  });
-  // sticky nav
-  let header = document.querySelector("header");
+  const timeDifference = currentTime - createdTime;
+  const hours = Math.floor(timeDifference / 3600000);
+  const days = Math.floor(hours / 24); // Số ngày
 
-  header.classList.toggle("sticky", window.scrollY > 100);
-  /** remove toggle icon and navbar when click navbar link */
-  menuIcon.classList.remove("bx-x");
-  navbar.classList.remove("active");
-};
-// scroll reveal
-ScrollReveal({
-  //   reset: true,
-  distance: "80px",
-  duration: 2000,
-  delay: 200,
-});
-ScrollReveal().reveal(
-  ".home__content, .home__social-media, .skill__heading, .contact__heading, .portfolio__heading, .about__content-heading",
-  { origin: "top" }
-);
-ScrollReveal().reveal(
-  ".home__img, .skill__container, .portfolio__box, .contact form",
-  { origin: "bottom" }
-);
-ScrollReveal().reveal(".home__content h1, .about img", { origin: "left" });
-ScrollReveal().reveal(".home__content p, .about__content", { origin: "right" });
+  let createdString;
+  if (days > 0) {
+    createdString = `created ${days} day(s) ago`;
+  } else if (hours > 0) {
+    createdString = `created ${hours} hour(s) ago`;
+  } else {
+    const minutes = Math.floor((timeDifference % 3600000) / 60000);
+    createdString = `created ${minutes} minute(s) ago`;
+  }
 
-// typed
-
-const typed = new Typed(".multiple-text", {
-  strings: ["Full-stack developer", "Gamer"],
-  typeSpeed: 80,
-  backSpeed: 70,
-  backDelay: 900,
-  loop: true,
+  // Thay đổi nội dung của phần tử để hiển thị chuỗi đã tạo
+  element.textContent = createdString;
 });
