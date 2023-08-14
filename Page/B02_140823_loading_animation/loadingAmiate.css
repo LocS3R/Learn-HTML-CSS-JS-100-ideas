@@ -1,0 +1,48 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #3434a2;
+}
+.myApp {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+div[class^="wrrapper_"] {
+  width: 30px;
+  height: 30px;
+  background-color: aliceblue;
+  border-radius: 50%;
+  animation: load 0.8s ease infinite;
+}
+
+.wrapper .wrrapper__dot--one {
+  animation-delay: 0.3s;
+}
+.wrapper .wrrapper__dot--two {
+  animation-delay: 0.4s;
+}
+.wrapper .wrrapper__dot--three {
+  animation-delay: 0.5s;
+}
+
+@keyframes load {
+  0% {
+    width: 30px;
+    height: 30px;
+  }
+  50% {
+    width: 40px;
+    height: 40px;
+  }
+}
